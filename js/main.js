@@ -1,12 +1,20 @@
+// ========================================
+// MAIN JAVASCRIPT FILE
+// ========================================
+
 // DOM Elements
-const navbar = document.getElementById("navbar")
-const navToggle = document.getElementById("navToggle")
-const navMenu = document.getElementById("navMenu")
-const scrollProgress = document.getElementById("scrollProgress")
-const scrollToTopBtn = document.getElementById("scrollToTop")
+
 const projectModal = document.getElementById("projectModal")
 
-// Import AOS
+// Global Variables
+const isMenuOpen = false
+const isScrolled = false
+const currentWordIndex = 0
+const currentText = ""
+const isDeleting = false
+const typeSpeed = 150
+
+// Declare AOS variable
 const AOS = window.AOS
 
 // Initialize AOS
@@ -19,81 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 })
 
-// Navbar scroll effect
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add("scrolled")
-    } else {
-        navbar.classList.remove("scrolled")
-    }
-
-    // Update scroll progress
-    const scrollTop = window.pageYOffset
-    const documentHeight = document.documentElement.scrollHeight - window.innerHeight
-    const progress = (scrollTop / documentHeight) * 100
-    scrollProgress.style.width = progress + "%"
-
-    // Show/hide scroll to top button
-    if (window.scrollY > 300) {
-        scrollToTopBtn.classList.add("visible")
-    } else {
-        scrollToTopBtn.classList.remove("visible")
-    }
-})
-
-// Mobile navigation toggle
-navToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("active")
-    const icon = navToggle.querySelector("i")
-    if (navMenu.classList.contains("active")) {
-        icon.className = "ri-close-line"
-    } else {
-        icon.className = "ri-menu-line"
-    }
-})
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-        navMenu.classList.remove("active")
-        navToggle.querySelector("i").className = "ri-menu-line"
-    })
-})
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-        e.preventDefault()
-        const target = document.querySelector(this.getAttribute("href"))
-        if (target) {
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            })
-        }
-    })
-})
-
-// Scroll to section function
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId)
-    if (section) {
-        section.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        })
-    }
-}
-
-// Scroll to top function
-scrollToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    })
-})
-
-// Project modal functions
+// 1. Project Modal Functions
 function openProjectModal(projectIndex) {
     // Hide all project content
     document.querySelectorAll(".modal-project").forEach((project) => {
@@ -134,104 +68,251 @@ function closeProjectModal() {
     }, 400)
 }
 
-// Close modal when clicking outside
-projectModal.addEventListener("click", (e) => {
-    if (e.target === projectModal) {
-        closeProjectModal()
+//UI Controller class
+class UIController {
+    constructor() {
+        this.body = document.body
+        this.desktopThemeToggle = document.getElementById("desktopThemeToggle")
+        this.mobileThemeToggle = document.getElementById("mobileThemeToggle")
+        this.mobileMenuBtn = document.getElementById("mobileMenuBtn")
+        this.mobileMenu = document.getElementById("mobileMenu")
+        this.floatingNav = document.getElementById("floatingNav")
+        this.scrollToTopBtn = document.getElementById("scrollToTop")
+        this.progressBar = document.getElementById("progressBar")
+        this.navLinks = document.querySelectorAll(".nav-link")
+        this.mobileLinks = document.querySelectorAll(".mobile-nav-link")
+        this.sections = document.querySelectorAll("section[id]")
+        // this.portfolioModal = document.getElementById("portfolioModal")
+        // this.modalClose = document.getElementById("modalClose")
+        // this.portfolioCards = document.querySelectorAll(".portfolio-card")
+        this.isMenuOpen = false
+
+        this.init()
     }
-})
 
-// Close modal with escape key
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && projectModal.classList.contains("active")) {
-        closeProjectModal()
+    init() {
+        this.initTheme()
+        this.initMenu()
+        this.initActiveLinks()
+        this.initSmoothScroll()
+        this.initClickOutside()
+        this.initBodyScrollLock()
+        this.initScrollToTop()
+        this.initProgressBar()
+        // this.initPortfolioModal()
+        this.initTypingEffect()
+        this.initCurrentYear()
     }
-})
 
-// Form handling (if you want to add a contact form later)
-function handleFormSubmit(event) {
-    event.preventDefault()
-    // Add form submission logic here
-    console.log("Form submitted")
-}
+    //Theme Toggle
+    initTheme() {
+        const currentTheme = localStorage.getItem("theme") || "light"
+        this.body.setAttribute("data-theme", currentTheme)
 
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-}
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("animate")
+        const toggleTheme = () => {
+            const currentTheme = this.body.getAttribute("data-theme")
+            const newTheme = currentTheme === "dark" ? "light" : "dark"
+            this.body.setAttribute("data-theme", newTheme)
+            localStorage.setItem("theme", newTheme)
         }
-    })
-}, observerOptions)
 
-// Observe elements for animation
-document.querySelectorAll("[data-aos]").forEach((el) => {
-    observer.observe(el)
-})
+        this.desktopThemeToggle?.addEventListener("click", toggleTheme)
+        this.mobileThemeToggle?.addEventListener("click", toggleTheme)
+    }
 
-// Add loading state management
-window.addEventListener("load", () => {
-    document.body.classList.add("loaded")
-})
+    //Mobile Menu open/close
+    initMenu() {
+        this.mobileMenuBtn?.addEventListener("change", () => {
+            this.isMenuOpen = this.mobileMenuBtn.checked
+            this.mobileMenu.classList.toggle("active", this.isMenuOpen)
+            this.floatingNav.classList.toggle("menu-open", this.isMenuOpen)
 
-// Performance optimization: Lazy load images
-if ("IntersectionObserver" in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const img = entry.target
-                img.src = img.dataset.src
-                img.classList.remove("lazy")
-                imageObserver.unobserve(img)
+            if (this.isMenuOpen) {
+                document.body.style.overflow = "hidden"
+            } else {
+                document.body.style.overflow = ""
             }
         })
-    })
 
-    document.querySelectorAll("img[data-src]").forEach((img) => {
-        imageObserver.observe(img)
-    })
-}
-
-// Add smooth reveal animations for elements
-function revealElements() {
-    const reveals = document.querySelectorAll(".reveal")
-
-    reveals.forEach((element) => {
-        const windowHeight = window.innerHeight
-        const elementTop = element.getBoundingClientRect().top
-        const elementVisible = 150
-
-        if (elementTop < windowHeight - elementVisible) {
-            element.classList.add("active")
-        }
-    })
-}
-
-window.addEventListener("scroll", revealElements)
-
-// Initialize everything when DOM is loaded
-document.addEventListener("DOMContentLoaded", () => {
-    // Set initial theme
-    document.documentElement.setAttribute("data-theme", "dark")
-
-    // Initialize scroll position
-    if (window.scrollY === 0) {
-        scrollProgress.style.width = "0%"
+        this.mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => this.closeMenu())
+        })
     }
 
-    // Add loading animation
-    setTimeout(() => {
-        document.body.classList.add("loaded")
-    }, 100)
+    closeMenu() {
+        this.isMenuOpen = false
+        this.mobileMenu.classList.remove("active")
+        this.floatingNav.classList.remove("menu-open")
+        this.mobileMenuBtn.checked = false
+        document.body.style.overflow = ""
+    }
 
-    // Initialize modal projects state
-    document.querySelectorAll(".modal-project").forEach((project) => {
-        project.style.opacity = "0"
-        project.style.transform = "translateY(20px)"
-    })
+    // Close mobile menu on outside click
+    initClickOutside() {
+        document.addEventListener("click", (e) => {
+            if (this.isMenuOpen && !this.floatingNav.contains(e.target)) {
+                this.closeMenu()
+            }
+        })
+    }
+
+    // Lock scroll when menu is open
+    initBodyScrollLock() {
+        this.mobileMenu.addEventListener("transitionstart", () => {
+            if (this.mobileMenu.classList.contains("active")) {
+                this.body.style.overflow = "hidden"
+            }
+        })
+
+        this.mobileMenu.addEventListener("transitionend", () => {
+            if (!this.mobileMenu.classList.contains("active")) {
+                this.body.style.overflow = ""
+            }
+        })
+    }
+
+    // Active section highlighting
+    initActiveLinks() {
+        const updateActiveLink = (activeId) => {
+            this.navLinks.forEach((link) => {
+                link.classList.toggle("active", link.getAttribute("href") === `#${activeId}`)
+            })
+            this.mobileLinks.forEach((link) => {
+                link.classList.toggle("active", link.getAttribute("href") === `#${activeId}`)
+            })
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        updateActiveLink(entry.target.id)
+                    }
+                })
+            },
+            {
+                threshold: 0.3,
+                rootMargin: "-20% 0px -70% 0px",
+            },
+        )
+
+        this.sections.forEach((section) => observer.observe(section))
+            ;[...this.navLinks, ...this.mobileLinks].forEach((link) => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault()
+                    const href = link.getAttribute("href").substring(1)
+                    updateActiveLink(href)
+                    const target = document.getElementById(href)
+                    if (target) {
+                        target.scrollIntoView({ behavior: "smooth", block: "start" })
+                    }
+                    if (this.isMenuOpen) {
+                        this.closeMenu()
+                    }
+                })
+            })
+    }
+
+    //Smooth Scroll
+    initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault()
+                const target = document.querySelector(this.getAttribute("href"))
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                    })
+                }
+            })
+        })
+    }
+
+    // Scroll-to-top button logic
+    initScrollToTop() {
+        if (!this.scrollToTopBtn) return
+
+        window.addEventListener("scroll", () => {
+            this.scrollToTopBtn.classList.toggle("visible", window.scrollY > 300)
+        })
+
+        this.scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            })
+        })
+    }
+
+    // Scroll progress bar
+    initProgressBar() {
+        if (!this.progressBar) return
+
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight
+            const progress = (scrollTop / docHeight) * 100
+            this.progressBar.style.width = `${progress}%`
+        })
+    }
+
+    // Typing effect for hero section
+    initTypingEffect() {
+        const typingElement = document.getElementById("typingText")
+        if (!typingElement) return
+
+        const words = ["fast", "accessible", "beautiful", "responsive", "modern"]
+        let currentWordIndex = 0
+        let currentCharIndex = 0
+        let isDeleting = false
+
+        const typeEffect = () => {
+            const currentWord = words[currentWordIndex]
+
+            if (isDeleting) {
+                typingElement.textContent = currentWord.substring(0, currentCharIndex - 1)
+                currentCharIndex--
+            } else {
+                typingElement.textContent = currentWord.substring(0, currentCharIndex + 1)
+                currentCharIndex++
+            }
+
+            let typeSpeed = isDeleting ? 100 : 150
+
+            if (!isDeleting && currentCharIndex === currentWord.length) {
+                typeSpeed = 2000 // Pause at end of word
+                isDeleting = true
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false
+                currentWordIndex = (currentWordIndex + 1) % words.length
+                typeSpeed = 500 // Pause before next word
+            }
+
+            setTimeout(typeEffect, typeSpeed)
+        }
+
+        typeEffect()
+    }
+
+    // Set current year in footer
+    initCurrentYear() {
+        const yearElement = document.getElementById("currentYear")
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear()
+        }
+    }
+}
+
+// Global utility functions
+function scrollToSection(sectionId) {
+    const target = document.getElementById(sectionId)
+    if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+}
+
+// Instantiate when DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+    new UIController()
 })
