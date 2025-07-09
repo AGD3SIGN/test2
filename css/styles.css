@@ -99,8 +99,11 @@ CSS Directory:
     text-decoration: none;
 }
 
-html {
+html, 
+body {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 body {
@@ -1287,14 +1290,13 @@ p {
 
 .modal-close {
     position: absolute;
-    top: var(--spacing-4);
-    right: var(--spacing-4);
+    top: var(--spacing-2);
+    right: var(--spacing-2);
     background: none;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--text-color);
-    padding: var(--spacing-2);
     border-radius: var(--border-radius);
     transition: var(--transition);
 }
