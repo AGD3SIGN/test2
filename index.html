@@ -36,99 +36,158 @@
 
 <body>
 
-    <!-- Skip to content button -->
-    <a href="#main" class="skip-to-content">Skip to main content</a>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+        <div class="loading-content">
+            <div class="loading-spinner" aria-label="Loading"></div>
+            <p class="loading-text">INITIALIZING THRESHOLD...</p>
+        </div>
+    </div>
 
-    <!-- Progress scroll bar -->
-    <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
-
-    <!-- Main Section -->
-    <main id="main">
-
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="container">
-                <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-                    <h1 class="hero-title">I build <span class="highlight-word">modern</span> websites that are<br>
-                        <span class="typing-text" id="typingText" data-typewriter aria-live="polite"
-                            aria-atomic="true"></span>
-                    </h1>
-                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
-                        Freelance web developer specializing in modern, accessible, and performance-optimized websites
-                        that convert visitors into customers.
-                    </p>
-
-                    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
-                        <a href="#portfolio" class="btn btn-primary">My portfolio</a>
-                        <a href="#contact" class="btn btn-secondary">
-                            Let's Talk!
-                        </a>
+    <!-- Main Page Container -->
+    <div class="page-container">
+        <!-- Header Navigation -->
+        <header class="site-header">
+            <nav class="hero-nav" role="navigation" aria-label="Main navigation">
+                <div class="nav-container">
+                    <!-- Brand/Logo -->
+                    <div class="nav-brand">
+                        <span class="brand-symbol" aria-label="Threshold Logo">▽</span>
                     </div>
-                    <!-- Scroll Down Indicator -->
-                    <a href="#about" class="scroll-indicator" data-aos="fade-up" data-aos-delay="900">
-                        <i class="ri-arrow-down-double-line"></i>
-                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <ul class="nav-menu" role="menubar">
+                        <li class="nav-item" role="none">
+                            <a href="#terminal" class="nav-link" role="menuitem" data-text="ACCESS TERMINAL">
+                                <span class="nav-bracket">[</span>
+                                <span class="nav-text">ACCESS TERMINAL</span>
+                                <span class="nav-bracket">]</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a href="#logs" class="nav-link" role="menuitem" data-text="TRANSMISSION LOGS">
+                                <span class="nav-bracket">[</span>
+                                <span class="nav-text">TRANSMISSION LOGS</span>
+                                <span class="nav-bracket">]</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a href="#archive" class="nav-link" role="menuitem" data-text="BIO-ARCHIVE">
+                                <span class="nav-bracket">[</span>
+                                <span class="nav-text">BIO-ARCHIVE</span>
+                                <span class="nav-bracket">]</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="none">
+                            <a href="#contact" class="nav-link" role="menuitem" data-text="INITIATE CONTACT">
+                                <span class="nav-bracket">[</span>
+                                <span class="nav-text">INITIATE CONTACT</span>
+                                <span class="nav-bracket">]</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu"
+                        aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Menu -->
+            <nav class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+                <ul class="mobile-nav-list" role="menubar">
+                    <li role="none">
+                        <a href="#terminal" class="mobile-nav-link" role="menuitem">[ ACCESS TERMINAL ]</a>
+                    </li>
+                    <li role="none">
+                        <a href="#logs" class="mobile-nav-link" role="menuitem">[ TRANSMISSION LOGS ]</a>
+                    </li>
+                    <li role="none">
+                        <a href="#archive" class="mobile-nav-link" role="menuitem">[ BIO-ARCHIVE ]</a>
+                    </li>
+                    <li role="none">
+                        <a href="#contact" class="mobile-nav-link" role="menuitem">[ INITIATE CONTACT ]</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section" id="hero" aria-labelledby="hero-title">
+                <div class="hero-container">
+                    <!-- 3D Spline Background Element -->
+                    <div class="spline-background" aria-hidden="true">
+                        <div class="spline-container">
+                            <spline-viewer url="https://prod.spline.design/AEA5ywRpa-950CS2/scene.splinecode"
+                                id="splineViewer" loading="lazy">
+                            </spline-viewer>
+                        </div>
+                    </div>
+
+                    <!-- Hero Content -->
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <h1 class="hero-title" id="hero-title">THRESHOLD</h1>
+
+                            <div class="hero-subtitle-section">
+                                <div class="subtitle-symbol" aria-hidden="true">▼</div>
+                                <p class="hero-subtitle">FORM FOLLOWS FUNCTION. ORIGIN UNKNOWN.</p>
+                            </div>
+
+                            <div class="hero-actions">
+                                <button class="hero-cta" id="harvestBtn" type="button">
+                                    <span class="cta-text">JOIN THE HARVEST</span>
+                                    <span class="cta-effect" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer Information -->
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <div class="system-status">
+                        <p class="status-line">
+                            <span class="status-icon" aria-hidden="true">[ ★ ]</span>
+                            <span class="status-text">DATA STREAM: UNKNOWN ORIGIN</span>
+                        </p>
+                        <p class="status-line">
+                            <span class="status-icon" aria-hidden="true">[ ★ ]</span>
+                            <span class="status-text">SIGNAL STRENGTH: <span id="signalStrength">94</span>%</span>
+                        </p>
+                        <p class="status-line">
+                            <span class="status-icon" aria-hidden="true">[ ★ ]</span>
+                            <span class="status-text">STATUS: ACTIVE LINK</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer-right">
+                    <div class="node-status">
+                        <p class="node-text">NODE: ACTIVATION COMPLETE. ENERGY CONSUMING.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </footer>
+    </div>
 
-        <div class="section">
-            <div class="container">
-                <div class="content">
-                    <h2>Building <span class="highlight-word style-2">Amazing</span> Solutions</h2>
-                    <p>This section demonstrates the red highlight variant. The effect triggers when the element enters
-                        the viewport.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="container">
-                <div class="content">
-                    <h2>Crafting <span class="highlight-word style-3">Digital</span> Experiences</h2>
-                    <p>Each highlight can have different colors and styles to match your brand and create visual
-                        hierarchy.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="container">
-                <div class="content">
-                    <h2>Delivering <span class="highlight-word style-4">Outstanding</span> Results</h2>
-                    <p>The animation uses smooth cubic-bezier timing for a professional, polished feel.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="container">
-                <div class="content">
-                    <h2>Creating <span class="highlight-word style-5">Memorable</span> Brands</h2>
-                    <p>Multiple words can be highlighted in the same title, and each can have different animation
-                        delays.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="container">
-                <div class="content">
-                    <h2>Ready to <span class="highlight-word">Elevate</span> Your <span
-                            class="highlight-word style-2">Portfolio</span>?</h2>
-                    <p>This effect works great for portfolios, landing pages, and any content where you want to draw
-                        attention to key words.</p>
-                </div>
-            </div>
-        </div>
-
-    </main>
 
 
 
 
     <!-- JS Script -->
     <script src="js/main.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.32/build/spline-viewer.js"></script>
 </body>
 
 </html>
