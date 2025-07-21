@@ -76,6 +76,11 @@ CSS Directory:
     --z-modal: 1050;
     --z-popover: 1060;
     --z-tooltip: 1070;
+
+    /* Grid Background Variables */
+    --grid-size: 50px;
+    --grid-color: rgba(79, 122, 255, 0.08);
+    --spotlight-size: 300px;
 }
 
 
