@@ -15,7 +15,7 @@ CSS Directory:
 ======================================== */
 
 /* ======================================== 
-1. ROOT VARIABLES & DESIGN SYSTEM
+ROOT VARIABLES & DESIGN SYSTEM
 ======================================== */
 :root {
     /* Colors */
@@ -98,7 +98,7 @@ CSS Directory:
 }
 
 /* ======================================== 
-2. BASE STYLES
+BASE STYLES
 ======================================== */
 *,
 *::before,
@@ -286,4 +286,446 @@ p {
     font-size: clamp(1rem, 2vw, 1.125rem);
     margin-bottom: 1rem;
     color: var(--text-secondary);
+}
+
+/* ======================================== 
+NAVIGATION MENU
+======================================== */
+.floating-nav {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 100%;
+    background: var(--nav-bg);
+    border-radius: clamp(15px, 8vw, 15px);
+    padding: clamp(10px, 2vw, 11px) clamp(16px, 4vw, 24px);
+    display: flex;
+    flex-direction: column;
+    z-index: var(--z-fixed);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(15px);
+}
+
+.floating-nav.menu-open {
+    border-radius: clamp(16px, 4vw, 24px);
+    padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px) clamp(16px, 4vw, 24px);
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(4px, 1.5vw, 8px);
+    flex: 1;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: clamp(4px, 1.5vw, 8px);
+    font-weight: 700;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--text-color);
+    flex-shrink: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--color-neutral-dark);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-icon {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    background: var(--primary-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.logo-icon::before {
+    content: "t";
+    color: var(--bg-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.logo:hover .logo-icon {
+    background: var(--accent-color);
+    transform: rotate(5deg);
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.nav-links,
+.theme-toggle {
+    display: none;
+}
+
+.nav-link {
+    padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2.5vw, 16px);
+    border-radius: 25px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: visible;
+    white-space: nowrap;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    border-radius: 1px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: calc(100% - clamp(20px, 5vw, 32px));
+}
+
+.nav-link:hover {
+    transform: translateY(-1px);
+}
+
+.nav-link.active::after {
+    width: calc(100% - clamp(20px, 5vw, 32px));
+}
+
+/* Theme Toggle for desktop */
+.theme-toggle {
+    width: clamp(36px, 8vw, 44px);
+    height: clamp(20px, 4.5vw, 24px);
+    background: var(--hover-bg);
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-left: clamp(8px, 2vw, 16px);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: clamp(14px, 3.5vw, 18px);
+    height: clamp(14px, 3.5vw, 18px);
+    background: var(--accent-color);
+    border-radius: 50%;
+    top: clamp(3px, 0.5vw, 3px);
+    left: clamp(3px, 0.5vw, 3px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    transform: translateX(clamp(16px, 4vw, 20px));
+}
+
+/* Mobile Menu Toggle */
+/* From Uiverse.io by JulanDeAlb */
+.hamburger {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hamburger input {
+    display: none;
+}
+
+.hamburger svg {
+    /* The size of the SVG defines the overall size */
+    height: 3em;
+    /* Define the transition for transforming the SVG */
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    /* Define the transition for transforming the Stroke */
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+        stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+    stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked+svg {
+    transform: rotate(-45deg);
+}
+
+.hamburger input:checked+svg .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 0;
+}
+
+.mobile-menu.active {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: clamp(12px, 3vw, 16px);
+}
+
+.mobile-menu-content {
+    padding-top: clamp(6px, 1.5vw, 8px);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: clamp(12px, 3vw, 16px);
+}
+
+.mobile-nav-link {
+    padding: clamp(10px, 2.5vw, 12px) clamp(12px, 3vw, 16px);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 2.5vw, 12px);
+    transform: translateY(10px);
+    opacity: 0;
+    animation: slideInUp 0.3s ease forwards;
+}
+
+.mobile-menu.active .mobile-nav-link:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.mobile-menu.active .mobile-nav-link:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.mobile-menu.active .mobile-nav-link:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.mobile-menu.active .mobile-nav-link:nth-child(4) {
+    animation-delay: 0.25s;
+}
+
+.mobile-menu.active .mobile-nav-link:nth-child(5) {
+    animation-delay: 0.3s;
+}
+
+@keyframes slideInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.mobile-nav-link:hover {
+    background: var(--hover-bg);
+    transform: translateX(8px);
+}
+
+.mobile-nav-link.active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.mobile-nav-link::before {
+    content: '→';
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    transition: transform 0.2s ease;
+}
+
+.mobile-nav-link:hover::before {
+    transform: translateX(4px);
+}
+
+/* Mobile theme toggle */
+.mobile-theme-section {
+    border-top: 1px solid var(--nav-border);
+    padding-top: clamp(10px, 2.5vw, 12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: slideInUp 0.3s ease forwards;
+    animation-delay: 0.35s;
+}
+
+.mobile-theme-label {
+    font-weight: 600;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1.5vw, 8px);
+}
+
+.mobile-theme-toggle {
+    width: clamp(40px, 8vw, 48px);
+    height: clamp(22px, 4.5vw, 26px);
+    background: var(--hover-bg);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.mobile-theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: clamp(16px, 3.5vw, 20px);
+    height: clamp(16px, 3.5vw, 20px);
+    background: var(--accent-color);
+    border-radius: 50%;
+    top: clamp(3px, 0.5vw, 3px);
+    left: clamp(3px, 0.5vw, 3px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .mobile-theme-toggle::before {
+    transform: translateX(clamp(18px, 4vw, 22px));
+}
+
+/* ======================================== 
+5. HERO SECTION
+======================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-32) 0 var(--spacing-16);
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-16);
+    align-items: center;
+}
+
+.hero-text h1 {
+    margin-bottom: var(--spacing-6);
+    line-height: 1.1;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-8);
+    max-width: 500px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-placeholder {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+}
+
+.hero-placeholder i {
+    font-size: 4rem;
+    color: var(--text-secondary);
+}
+
+/* ======================================== 
+RESPONSIVE DESIGN
+======================================== */
+@media screen and (max-width: 991px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .hero {
+        padding: var(--spacing-24) 0 var(--spacing-16);
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-4);
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+    }
 }
