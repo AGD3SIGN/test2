@@ -11,50 +11,71 @@
 </head>
 
 <body>
-
-
-    <!-- Hero Section (starts semantic content) -->
-    <section class="hero" id="hero">
-        <!-- Spline Background -->
-        <div class="spline-background">
-            <spline-viewer url="https://prod.spline.design/nTaY9mY-bjyCq7U6/scene.splinecode"></spline-viewer>
-        </div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Hey, I see you.<br>Let me help make<br>sure others do too!</h1>
-                    <p class="hero-subtitle">
-                        Your business deserves to be seen. I create stunning, high-converting websites that help your
-                        brand stand out and attract the customers you deserve.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="#portfolio" class="btn btn-primary">
-                            Let's Build Your Website
-                            <i class="ri-arrow-right-line"></i>
+    <!-- Header/Navigation -->
+    <!-- Navigation Menu -->
+    <header class="header" role="banner">
+        <nav class="floating-nav" id="floatingNav">
+            <div class="nav-header">
+                <div class="nav-content">
+                    <!-- Logo -->
+                    <div class="nav-brand">
+                        <a href="#" class="logo">
+                            <div class="logo-icon"></div>
+                            <span class="logo-text">Design<span class="text-accent">.</span></span>
                         </a>
-                        <a href="#about" class="btn btn-secondary">Learn More</a>
                     </div>
+
+
+                    <!-- Nav Links -->
+                    <div class="nav-links">
+                        <a href="#home" class="nav-link active">Home</a>
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#services" class="nav-link">Services</a>
+                        <a href="#portfolio" class="nav-link">Portfolio</a>
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <label for="dark-mode-toggle" class="toggle"></label>
                 </div>
 
-                <div class="hero-spline">
-                    <spline-viewer url="https://prod.spline.design/I3Tu2NaWepRefAbX/scene.splinecode"></spline-viewer>
-                </div>
+                <!-- Mobile Toggle -->
+                <label class="hamburger">
+                    <input type="checkbox" id="mobileMenuBtn">
+                    <svg viewBox="0 0 32 32">
+                        <path class="line line-top-bottom"
+                            d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22">
+                        </path>
+                        <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                </label>
             </div>
 
+            <!-- Mobile Menu -->
+            <div class="mobile-menu" id="mobileMenu">
+                <div class="mobile-menu-content">
+                    <div class="mobile-nav-links">
+                        <a href="#home" class="mobile-nav-link active">Home</a>
+                        <a href="#about" class="mobile-nav-link">About</a>
+                        <a href="#services" class="mobile-nav-link">Services</a>
+                        <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
+                        <a href="#contact" class="mobile-nav-link">Contact</a>
+                    </div>
 
-        </div>
-    </section>
+                    <div class="mobile-theme-section">
+                        <div class="mobile-theme-label">
+                            Light/Dark Mode
+                        </div>
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <label for="dark-mode-toggle" class="toggle"></label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Your next sections here -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About</h2>
-            <p class="section-subtitle">Your next content starts here.</p>
-        </div>
-    </section>
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
     <script src="js/beams.js"></script>
 </body>
 

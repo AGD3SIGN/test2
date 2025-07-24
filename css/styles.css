@@ -1,5 +1,15 @@
+/* ========================================
+CSS Directory: 
+1. Root Variables
+2. CSS Reset
+3. Utility Classes
+4. Buttons
+5. Navigation Menu 
+6. Hero Section 
+======================================== */
+
 /* ======================================== 
-Root Variables
+1. ROOT VARIABLES & DESIGN SYSTEM
 ======================================== */
 :root {
     /* Colors */
@@ -10,7 +20,6 @@ Root Variables
     --nav-border: rgba(0, 0, 0, 0.1);
     --hover-bg: rgba(0, 0, 0, 0.05);
     --primary-color: #4f7aff;
-    --primary-color-hover: #3756c9;
     --accent-color: #43d3a1;
     --card-bg: #f5f5f5;
     --border: #e0e0e0;
@@ -193,119 +202,3 @@ p {
     margin-bottom: var(--spacing-16);
 }
 
-/* ===== Button Utilities ===== */
-/* Button Styling */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-3) var(--spacing-6);
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-color-hover);
-}
-
-.btn-secondary {
-    background-color: transparent;
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-}
-
-.btn-secondary:hover {
-    background-color: var(--hover-bg);
-}
-
-
-
-/* ========================================
-Hero Section Styling (Over Background)
-======================================== */
-/* ===== Spline Viewer ===== */
-.spline-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.spline-background::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    /* adjust opacity as needed */
-    z-index: 1;
-}
-
-.spline-background spline-viewer {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.hero {
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: var(--spacing-32) 0 var(--spacing-16);
-}
-
-.hero-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-16);
-    align-items: center;
-}
-
-.hero-text h1 {
-    margin-bottom: var(--spacing-6);
-    line-height: 1.1;
-}
-
-.hero-text p {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-8);
-    max-width: 500px;
-}
-
-.hero-actions {
-    display: flex;
-    gap: var(--spacing-4);
-    flex-wrap: wrap;
-}
-
-.hero-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.hero-spline {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.hero-spline spline-viewer {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
