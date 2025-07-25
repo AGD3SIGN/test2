@@ -115,6 +115,7 @@ body {
     font-family: var(--font-body);
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
     transition: var(--transition);
 }
 
@@ -204,6 +205,7 @@ p {
 .section-header {
     margin-bottom: var(--spacing-16);
 }
+
 
 /* ======================================== 
 Navigation / Header 
@@ -509,6 +511,89 @@ Navigation / Header
     transform: translateX(4px);
 }
 
+/* ======================================== 
+HERO SECTION
+======================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-32) 0 var(--spacing-16);
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--spacing-8);
+    text-align: center;
+    position: relative;
+}
+
+.hero-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at bottom right, rgba(30, 64, 175, 0.3), transparent 70%);
+    pointer-events: none;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-16);
+    align-items: center;
+}
+
+.hero-text h1 {
+    margin-bottom: var(--spacing-6);
+    line-height: 1.1;
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-8);
+    max-width: 500px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-placeholder {
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1;
+    background: var(--card-bg);
+    border-radius: var(--border-radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+}
+
+.hero-placeholder i {
+    font-size: 4rem;
+    color: var(--text-secondary);
+}
+
+/* ======================================== 
+MEDIA QUERIES
+======================================== */
+
 /* Large Desktop */
 @media (min-width: 1200px) {
     .container {
@@ -552,9 +637,7 @@ Navigation / Header
 }
 
 /* Desktop */
-@media (min-width: 1200px) {
-    
-}
+@media (min-width: 1200px) {}
 
 @media (min-width: 992px) and (max-width: 1199px) {
     .container {

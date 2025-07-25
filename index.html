@@ -5,12 +5,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beams Background</title>
+    <!-- Styles CSS -->
     <link rel="stylesheet" href="css/styles.css" />
+    <!-- Remixicons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="particles"></div>
+
     <!-- Navigation Menu -->
     <header class="header" role="banner">
         <nav class="floating-nav" id="floatingNav">
@@ -66,9 +72,37 @@
         </nav>
     </header>
 
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <!-- Hero Container -->
+        <div class="hero-container container">
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </h1>
+                <p class="hero-subtitle">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, doloremque.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, doloremque.
+                </p>
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">My work</a>
+                    <a href="#" class="btn btn-secondary">Let's Talk!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ===== Scripts ===== -->
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Menu Toggle JS -->
+    <script src="js/menuController.js"></script>
+    <!-- Animated BG JS -->
+    <script src="js/animatedParticles.js"></script>
 </body>
 
 </html>
