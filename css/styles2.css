@@ -288,7 +288,7 @@ NAV/HEADER
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 32px);
-    max-width: 100%;
+    max-width: 1450px;
     background: var(--nav-bg);
     border-radius: clamp(15px, 8vw, 15px);
     padding: clamp(10px, 2vw, 11px) clamp(16px, 4vw, 24px);
@@ -296,7 +296,7 @@ NAV/HEADER
     flex-direction: column;
     z-index: var(--z-fixed);
     box-shadow: var(--shadow-lg);
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(50px);
 }
 
 .floating-nav.menu-open {
@@ -586,6 +586,34 @@ HERO SECTION
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+/* ===== Typing text ===== */
+.typing-text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.typing-text::after {
+    content: '|';
+    color: var(--primary-color);
+    animation: blink 1s infinite;
+    font-weight: normal;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
 }
 
 .hero-subtitle {
