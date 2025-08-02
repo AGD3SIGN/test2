@@ -843,6 +843,8 @@ PORTFOLIO SECTION
     border: 1px solid var(--border);
     transition: var(--transition);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio-card:hover {
@@ -852,17 +854,16 @@ PORTFOLIO SECTION
 
 .portfolio-image {
     width: 100%;
-    height: 250px;
-    background: var(--card-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 250px; /* Controls the height */
+    overflow: hidden;
     border-bottom: 1px solid var(--border);
 }
 
-.portfolio-image i {
-    font-size: 3rem;
-    color: var(--text-secondary);
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures no distortion */
+    display: block;
 }
 
 .portfolio-info {
